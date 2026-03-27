@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Janete Barbosa — Data Scientist & ML Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:        #faf5ee;
+      --bg2:       #f0e6d3;
+      --surface:   #ffffff;
+      --accent:    #b07d3a;
+      --accent-lt: #f5eadb;
+      --text-h:    #1a1208;
+      --text-b:    #4a3f2f;
+      --text-m:    #9a8870;
+      --border:    rgba(176,125,58,.18);
+      --radius:    14px;
+      --shadow:    0 2px 24px rgba(176,125,58,.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text-b); font-size: 16px; line-height: 1.7; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+    .section { padding: 96px 0; }
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(34px, 4.5vw, 50px); font-weight: 900; color: var(--text-h); line-height: 1.1; margin-bottom: 48px; }
+    .section-title em { font-style: italic; color: var(--accent); }
+
+    /* Navbar */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250,245,238,.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text-h); }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-m); transition: color .2s; }
+    .nav-links a:hover { color: var(--text-h); }
+    .btn-hire { background: var(--text-h); color: var(--bg) !important; padding: 9px 20px; border-radius: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; transition: opacity .2s; }
+    .btn-hire:hover { opacity: .82; }
+
+    /* Hero */
+    #hero { padding-top: 120px; padding-bottom: 80px; }
+    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .hero-photo img { width: 100%; max-width: 420px; border-radius: 20px; object-fit: cover; aspect-ratio: 3/4; object-position: top center; border: 1px solid var(--border); }
+    .hero-text { display: flex; flex-direction: column; gap: 22px; }
+    .hero-avail { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(176,125,58,.3); color: var(--accent); font-size: 12px; font-weight: 500; padding: 6px 16px; border-radius: 99px; width: fit-content; letter-spacing: 0.5px; }
+    .hero-avail::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(34px, 4vw, 54px); font-weight: 900; color: var(--text-h); line-height: 1.1; }
+    .hero-title em { color: var(--accent); font-style: italic; }
+    .hero-sub { font-size: 15px; color: var(--text-m); max-width: 420px; line-height: 1.75; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary { background: var(--accent); color: #fff; padding: 13px 26px; border-radius: 8px; font-weight: 600; font-size: 14px; transition: opacity .2s; }
+    .btn-primary:hover { opacity: .85; }
+    .btn-secondary { background: transparent; color: var(--text-h); padding: 13px 26px; border-radius: 8px; font-weight: 600; font-size: 14px; border: 1.5px solid var(--border); transition: border-color .2s; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* About */
+    #about { background: var(--surface); }
+    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .about-text p { color: var(--text-b); margin-bottom: 16px; font-size: 15px; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .stat-card { background: var(--bg); border-radius: var(--radius); padding: 20px; border: 1px solid var(--border); }
+    .stat-val { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 900; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+    .stat-label { font-size: 11px; color: var(--text-m); font-weight: 500; letter-spacing: 0.3px; }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
+    .skill-card { background: var(--surface); border-radius: var(--radius); padding: 22px; border: 1px solid var(--border); }
+    .skill-card-title { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .skill-tag { background: var(--accent-lt); color: var(--text-b); font-size: 12px; font-weight: 500; padding: 4px 11px; border-radius: 5px; }
+
+    /* Projects */
+    #projects { background: var(--surface); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
+    .project-card { background: var(--bg); border-radius: var(--radius); padding: 26px; display: flex; flex-direction: column; gap: 12px; border: 1px solid var(--border); transition: transform .2s, box-shadow .2s; }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(176,125,58,.12); }
+    .project-badges { display: flex; flex-wrap: wrap; gap: 7px; }
+    .badge { font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 3px 10px; border-radius: 5px; background: var(--accent-lt); color: var(--accent); }
+    .project-name { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; color: var(--text-h); }
+    .project-desc { font-size: 13px; color: var(--text-m); flex: 1; line-height: 1.65; }
+    .project-tech { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tech-tag { font-size: 11px; padding: 3px 9px; border-radius: 4px; background: rgba(176,125,58,.08); color: var(--text-b); border: 1px solid var(--border); }
+    .project-link { font-size: 13px; font-weight: 600; color: var(--accent); display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; transition: gap .2s; }
+    .project-link:hover { gap: 8px; }
+
+    /* Education */
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .edu-card { background: var(--surface); border-radius: var(--radius); padding: 30px; border: 1px solid var(--border); }
+    .edu-school { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .edu-degree { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; color: var(--text-h); margin-bottom: 4px; }
+    .edu-date { font-size: 12px; color: var(--text-m); margin-bottom: 14px; }
+    .edu-desc { font-size: 13px; color: var(--text-b); line-height: 1.7; }
+
+    /* Resume */
+    #resume { background: var(--surface); }
+    .resume-banner { background: var(--text-h); border-radius: var(--radius); padding: 48px 52px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+    .resume-banner h2 { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 900; color: var(--bg); }
+    .resume-desc { font-size: 14px; color: rgba(250,245,238,.6); margin-top: 8px; max-width: 440px; }
+    .resume-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-sand { background: var(--accent); color: #fff; padding: 13px 26px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; border: none; transition: opacity .2s; font-family: 'DM Sans', sans-serif; }
+    .btn-sand:hover { opacity: .85; }
+    .btn-outline-sand { background: transparent; color: var(--bg); padding: 13px 26px; border-radius: 8px; font-weight: 600; font-size: 14px; border: 1.5px solid rgba(250,245,238,.3); transition: border-color .2s; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+    .btn-outline-sand:hover { border-color: var(--bg); }
+
+    /* Contact */
+    .contact-list { display: flex; flex-direction: column; gap: 12px; max-width: 620px; }
+    .contact-item { background: var(--surface); border-radius: var(--radius); padding: 18px 24px; display: flex; align-items: center; gap: 18px; border: 1px solid var(--border); transition: transform .2s, border-color .2s; }
+    .contact-item:hover { transform: translateX(6px); border-color: var(--accent); }
+    .contact-icon { width: 42px; height: 42px; background: var(--accent-lt); color: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .contact-info { flex: 1; }
+    .contact-type { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-m); margin-bottom: 2px; }
+    .contact-value { font-size: 14px; font-weight: 500; color: var(--text-h); }
+    .contact-arrow { color: var(--text-m); font-size: 16px; }
+
+    /* Footer */
+    footer { text-align: center; padding: 32px; font-size: 12px; color: var(--text-m); border-top: 1px solid var(--border); letter-spacing: 0.3px; }
+
+    /* Chatbot */
+    .chat-bubble { position: fixed; bottom: 28px; right: 28px; z-index: 200; width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: #fff; border: none; cursor: pointer; font-size: 22px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(176,125,58,.35); transition: transform .2s; }
+    .chat-bubble:hover { transform: scale(1.08); }
+    .chat-window { position: fixed; bottom: 92px; right: 28px; z-index: 200; width: 360px; height: 480px; background: var(--surface); border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 8px 48px rgba(176,125,58,.18); display: none; flex-direction: column; overflow: hidden; }
+    .chat-window.open { display: flex; }
+    .chat-header { background: var(--text-h); color: var(--bg); padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
+    .chat-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .chat-header-info { flex: 1; }
+    .chat-header-name { font-size: 14px; font-weight: 600; }
+    .chat-header-status { font-size: 11px; color: rgba(250,245,238,.6); }
+    .chat-close { background: none; border: none; color: rgba(250,245,238,.6); cursor: pointer; font-size: 18px; padding: 0; }
+    .chat-close:hover { color: var(--bg); }
+    .chat-messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .msg { max-width: 82%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55; }
+    .msg-bot { background: var(--bg2); color: var(--text-h); border-bottom-left-radius: 4px; align-self: flex-start; }
+    .msg-user { background: var(--accent); color: #fff; border-bottom-right-radius: 4px; align-self: flex-end; }
+    .msg-typing { background: var(--bg2); color: var(--text-m); border-bottom-left-radius: 4px; align-self: flex-start; font-style: italic; font-size: 12px; padding: 10px 14px; border-radius: 12px; }
+    .chat-suggestions { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 12px; }
+    .chat-suggestion { background: var(--accent-lt); color: var(--accent); border: 1px solid var(--border); border-radius: 99px; font-size: 11px; padding: 4px 12px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .2s; }
+    .chat-suggestion:hover { background: var(--bg2); }
+    .chat-input-row { padding: 12px 16px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+    .chat-input { flex: 1; border: 1px solid var(--border); border-radius: 8px; padding: 9px 13px; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; background: var(--bg); color: var(--text-h); }
+    .chat-input:focus { border-color: var(--accent); }
+    .chat-send { background: var(--accent); color: #fff; border: none; border-radius: 8px; padding: 9px 14px; cursor: pointer; font-size: 14px; transition: opacity .2s; }
+    .chat-send:hover { opacity: .85; }
+
+    /* Animations */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up { animation: fadeUp .6s ease both; }
+    .delay-1 { animation-delay: .1s; }
+    .delay-2 { animation-delay: .2s; }
+    .delay-3 { animation-delay: .3s; }
+    .delay-4 { animation-delay: .4s; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-inner, .about-inner, .edu-grid { grid-template-columns: 1fr; }
+      .hero-photo img { max-width: 100%; }
+      .nav-links { display: none; }
+      .resume-banner { flex-direction: column; padding: 32px; }
+      .chat-window { width: calc(100vw - 40px); right: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">Janete<span>.</span></div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+        <a href="/cdn-cgi/l/email-protection#472d2629223322692424692526352528342669757f07202a262e2b6924282a783432252d2224337a0f2e352e292067022936322e353e67a5c7d367032633266714242e2229332e3433" class="btn-hire">Hire Me</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="section">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-photo fade-up">
+          <!-- Place profile.png in the same folder as index.html -->
+          <img src="profile.png" alt="Janete Barbosa — Data Scientist & ML Engineer" />
+        </div>
+        <div class="hero-text">
+          <div class="hero-avail fade-up delay-1">Available for opportunities</div>
+          <h1 class="hero-title fade-up delay-2">
+            Hi, I'm <em>Janete</em><br>
+            Data Scientist<br>
+            &amp; <em>ML Engineer.</em>
+          </h1>
+          <p class="hero-sub fade-up delay-3">
+            Working at the intersection of Data Science and AI — building predictive models,
+            recommendation systems, and LLM-powered applications that create real business value.
+          </p>
+          <div class="hero-btns fade-up delay-4">
+            <a href="#projects" class="btn-primary">View Projects</a>
+            <a href="#contact" class="btn-secondary">Get in Touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-text">
+          <div class="section-label">About me</div>
+          <h2 class="section-title">Turning data into <em>decisions.</em></h2>
+          <p>Hi, I'm Janete, a Junior Data Scientist and ML Engineer with a background in Management and international operations. I work at the intersection of Data Science and Artificial Intelligence, applying Machine Learning, Deep Learning, and NLP techniques to build predictive models, recommendation systems, and Generative AI applications on complex datasets.</p>
+          <p>From classical ML approaches to modern LLM-driven solutions, I focus on robust methodologies and delivering insights and models that create real business value.</p>
+          <p>Currently refining the Guest Intelligence System — a hybrid recommender system combined with an LLM-powered Streamlit dashboard — actively seeking my first industry role and always looking for interesting problems to solve.</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-val">BSc</div>
+            <div class="stat-label">Management degree</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">Now</div>
+            <div class="stat-label">Available immediately</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">PT</div>
+            <div class="stat-label">Portuguese · C2</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">EN</div>
+            <div class="stat-label">English · B2</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">ES</div>
+            <div class="stat-label">Spanish · B2</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">6</div>
+            <div class="stat-label">Projects built</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section">
+    <div class="container">
+      <div class="section-label">Skills</div>
+      <h2 class="section-title">Core <em>Tech Stack</em></h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-card-title">AI &amp; LLM Systems</div>
+          <div class="skill-tags">
+            <span class="skill-tag">RAG</span><span class="skill-tag">LLM Applications</span><span class="skill-tag">Semantic Search</span><span class="skill-tag">Embeddings</span><span class="skill-tag">Prompt Engineering</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">LLM Frameworks &amp; Tools</div>
+          <div class="skill-tags">
+            <span class="skill-tag">OpenAI</span><span class="skill-tag">Groq</span><span class="skill-tag">Gemini</span><span class="skill-tag">LangChain</span><span class="skill-tag">Agent Tools</span><span class="skill-tag">Ollama</span><span class="skill-tag">HuggingFace</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">Machine Learning</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Scikit-learn</span><span class="skill-tag">XGBoost</span><span class="skill-tag">PyTorch</span><span class="skill-tag">TensorFlow</span><span class="skill-tag">Feature Engineering</span><span class="skill-tag">Model Evaluation</span><span class="skill-tag">Recommender Systems</span><span class="skill-tag">GridSearchCV</span><span class="skill-tag">RandomizedSearchCV</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">NLP</div>
+          <div class="skill-tags">
+            <span class="skill-tag">DistilBERT</span><span class="skill-tag">Transformers</span><span class="skill-tag">Text Classification</span><span class="skill-tag">TF-IDF</span><span class="skill-tag">LLaMA 3.3</span><span class="skill-tag">MiniLM</span><span class="skill-tag">MPNet</span><span class="skill-tag">SVM</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">Computer Vision</div>
+          <div class="skill-tags">
+            <span class="skill-tag">CNNs</span><span class="skill-tag">EfficientNet</span><span class="skill-tag">Image Classification</span><span class="skill-tag">Data Augmentation</span><span class="skill-tag">Transfer Learning</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">Data &amp; Analysis</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Pandas</span><span class="skill-tag">NumPy</span><span class="skill-tag">Matplotlib</span><span class="skill-tag">Seaborn</span><span class="skill-tag">SQL</span><span class="skill-tag">Jupyter</span><span class="skill-tag">Power BI</span><span class="skill-tag">Tableau</span><span class="skill-tag">Streamlit</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-title">Programming</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span><span class="skill-tag">SQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="section-label">Projects</div>
+      <h2 class="section-title">Things I have <em>built.</em></h2>
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <div class="project-badges"><span class="badge">Generative AI</span><span class="badge">RAG</span><span class="badge">Final Project</span></div>
+          <div class="project-name">Guest Intelligence System</div>
+          <p class="project-desc">Behavioural KYC and personalised recommender system for hospitality. Combines Content-Based Filtering and Collaborative Filtering (WBPR) with adaptive weights. LLM-powered Streamlit dashboard with radar charts, BI reporting, and full explainability. NDCG@10 = 0.84.</p>
+          <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">LangChain</span><span class="tech-tag">RAG</span><span class="tech-tag">Cornac</span><span class="tech-tag">Streamlit</span><span class="tech-tag">SQL</span></div>
+          <a href="https://github.com/janeteccbarbosa28-eng/Guest_Intelligence_System_Final_Project" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-badges"><span class="badge">NLP</span><span class="badge">LLM</span></div>
+          <div class="project-name">Fake &amp; Real News Classifier</div>
+          <p class="project-desc">Complete NLP pipeline from Bag-of-Words to transformer fine-tuning, achieving F1 = 0.98 with fine-tuned DistilBERT on 34,152 headlines. Built an interactive Streamlit chatbot powered by LLaMA 3.3 via Groq API as a personal initiative beyond project requirements.</p>
+          <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">DistilBERT</span><span class="tech-tag">HuggingFace</span><span class="tech-tag">Groq API</span><span class="tech-tag">Streamlit</span></div>
+          <a href="https://github.com/janeteccbarbosa28-eng/NLP-Project---Predict-Fake-and-Real-News" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-badges"><span class="badge">Computer Vision</span><span class="badge">Deep Learning</span></div>
+          <div class="project-name">CIFAR-10 Image Classification</div>
+          <p class="project-desc">Designed and compared multiple CNN architectures on the CIFAR-10 dataset. Achieved 96.94% accuracy by stacking EfficientNetB0, EfficientNetV2B1, and EfficientNetV2S models. Applied transfer learning, data augmentation, and regularisation techniques.</p>
+          <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">TensorFlow</span><span class="tech-tag">PyTorch</span><span class="tech-tag">EfficientNet</span><span class="tech-tag">Keras</span></div>
+          <a href="https://github.com/janeteccbarbosa28-eng/Computer-Vision-project-CIFAR-10" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-badges"><span class="badge">Machine Learning</span><span class="badge">Regression</span></div>
+          <div class="project-name">House Price Prediction</div>
+          <p class="project-desc">Built and evaluated multiple linear and logarithmic regression models to predict house prices, handling real-world challenges including missing values, skewed distributions, and poor data documentation.</p>
+          <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">Scikit-learn</span><span class="tech-tag">Pandas</span><span class="tech-tag">NumPy</span><span class="tech-tag">Matplotlib</span></div>
+          <a href="https://github.com/janeteccbarbosa28-eng/House_Pricing_Prediction_with_ML" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-badges"><span class="badge">EDA</span><span class="badge">SQL</span></div>
+          <div class="project-name">Airbnb EDA &amp; SQL Analysis</div>
+          <p class="project-desc">Analysed 102,599 Airbnb listings using EDA and SQL to uncover relationships between listing characteristics, price, and guest ratings. Found that ratings and house rules show significant association only in reduced rule subsets.</p>
+          <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">SQL</span><span class="tech-tag">Pandas</span><span class="tech-tag">Seaborn</span><span class="tech-tag">Matplotlib</span></div>
+          <a href="https://github.com/janeteccbarbosa28-eng/EDA-SQL-Airbnb-project" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-badges"><span class="badge">OOP</span><span class="badge">Python</span></div>
+          <div class="project-name">Vikings OOP Game</div>
+          <p class="project-desc">Built a turn-based OOP combat simulation between Vikings and Saxons, extending base requirements with custom game logic upgrades.</p>
+          <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">OOP</span></div>
+          <a href="https://github.com/janeteccbarbosa28-eng/mini-project-vikings-en" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="section">
+    <div class="container">
+      <div class="section-label">Education</div>
+      <h2 class="section-title">Academic <em>background.</em></h2>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-school">IronHack</div>
+          <div class="edu-degree">Data Science &amp; Machine Learning</div>
+          <div class="edu-date">Jan 2026 – Mar 2026</div>
+          <div class="edu-desc">400+ hours intensive bootcamp covering the full Data Science &amp; ML stack. 6 end-to-end projects across Machine Learning, NLP, Computer Vision, and Generative AI. Topics include Python, Deep Learning, RAG architectures, LLMs, LangChain, and MLOps.</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-school">Universidade do Algarve — ESGHT</div>
+          <div class="edu-degree">Bachelor's Degree in Management</div>
+          <div class="edu-date">2019 – 2022</div>
+          <div class="edu-desc">Comprehensive degree covering Finance &amp; Accounting, Economics, Statistics, Marketing, Human Resources, and Business Law. Applied projects across real companies using SWOT, PESTEL, Porter's Five Forces, BCG Matrix, and business simulation with Primavera ERP.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUME -->
+  <section id="resume" class="section">
+    <div class="container">
+      <div class="section-label">Resume</div>
+      <p style="color:var(--text-m); max-width:580px; margin-bottom:32px; font-size:15px;">
+        I'm actively looking for my first role as a Junior Data Scientist, ML Engineer, AI Engineer, or Data Analyst — open to remote, hybrid, or on-site roles across Europe and Africa.
+      </p>
+      <div class="resume-banner">
+        <div>
+          <h2>Get my CV.</h2>
+          <p class="resume-desc">Request access by filling out a short form — I'll get back to you promptly.</p>
+        </div>
+        <div class="resume-btns">
+          <button class="btn-sand" onclick="window.open('https://forms.gle/hxmFDG5gCS8ADpZL7','_blank')">Request CV</button>
+          <button class="btn-outline-sand" onclick="toggleChat()">Chat with AI</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Got a data problem<br><em>worth solving?</em></h2>
+      <div class="contact-list">
+        <a href="/cdn-cgi/l/email-protection#0268636c6776672c61612c606370606d71632c303a42656f636b6e2c616d6f" class="contact-item">
+          <div class="contact-icon">@</div>
+          <div class="contact-info"><div class="contact-type">Email</div><div class="contact-value"><span class="__cf_email__" data-cfemail="3b515a555e4f5e15585815595a495954485a1509037b5c565a525715585456">[email&#160;protected]</span></div></div>
+          <div class="contact-arrow">→</div>
+        </a>
+        <a href="https://linkedin.com/in/janete-barbosa-datascientist" target="_blank" class="contact-item">
+          <div class="contact-icon">in</div>
+          <div class="contact-info"><div class="contact-type">LinkedIn</div><div class="contact-value">Let's connect</div></div>
+          <div class="contact-arrow">→</div>
+        </a>
+        <a href="https://github.com/janeteccbarbosa28-eng" target="_blank" class="contact-item">
+          <div class="contact-icon">GH</div>
+          <div class="contact-info"><div class="contact-type">GitHub</div><div class="contact-value">View my repositories</div></div>
+          <div class="contact-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>Designed &amp; built by Janete Barbosa · 2026</footer>
+
+  <!-- CHATBOT BUBBLE -->
+  <button class="chat-bubble" onclick="toggleChat()" title="Chat with Janete's AI">💬</button>
+
+  <!-- CHATBOT WINDOW -->
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-avatar">JB</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">Janete's AI Assistant</div>
+        <div class="chat-header-status">Ask me anything about Janete</div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg msg-bot">Hi! I'm Janete's AI Assistant. I can answer questions about her background, projects, skills, and experience. How can I help you? 👋</div>
+    </div>
+    <div class="chat-suggestions" id="chatSuggestions">
+      <button class="chat-suggestion" onclick="sendSuggestion('Tell me about the Guest Intelligence System')">Guest Intelligence System</button>
+      <button class="chat-suggestion" onclick="sendSuggestion('What are her technical skills?')">Technical skills</button>
+      <button class="chat-suggestion" onclick="sendSuggestion('Is she available for work?')">Availability</button>
+      <button class="chat-suggestion" onclick="sendSuggestion('Tell me about her background')">Her background</button>
+    </div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Ask something..." onkeydown="if(event.key==='Enter') sendMessage()" />
+      <button class="chat-send" onclick="sendMessage()">→</button>
+    </div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Toggle chat window open/close
+    function toggleChat() {
+      document.getElementById('chatWindow').classList.toggle('open');
+    }
+
+    // Send a suggestion shortcut
+    function sendSuggestion(text) {
+      document.getElementById('chatInput').value = text;
+      document.getElementById('chatSuggestions').style.display = 'none';
+      sendMessage();
+    }
+
+    // Send message to Flask server (which calls Groq API securely)
+    // IMPORTANT: After deploying to Render.com, replace the URL with your actual server URL
+    const SERVER_URL = "https://janete-portfolio-chatbot.onrender.com/chat";
+
+    async function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const messages = document.getElementById('chatMessages');
+      const text = input.value.trim();
+      if (!text) return;
+
+      messages.innerHTML += '<div class="msg msg-user">' + escapeHtml(text) + '</div>';
+      input.value = '';
+      messages.scrollTop = messages.scrollHeight;
+
+      const typingId = 'typing-' + Date.now();
+      messages.innerHTML += '<div class="msg msg-typing" id="' + typingId + '">Thinking...</div>';
+      messages.scrollTop = messages.scrollHeight;
+
+      try {
+        // Call Flask server — Groq API key stays safe on the server
+        const response = await fetch(SERVER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
+        });
+
+        const data = await response.json();
+        const reply = data.reply || "Sorry, I couldn't process that. Please try again.";
+
+        document.getElementById(typingId) && document.getElementById(typingId).remove();
+        messages.innerHTML += '<div class="msg msg-bot">' + escapeHtml(reply) + '</div>';
+        messages.scrollTop = messages.scrollHeight;
+
+      } catch (err) {
+        document.getElementById(typingId) && document.getElementById(typingId).remove();
+        messages.innerHTML += '<div class="msg msg-bot">Sorry, something went wrong. Please reach out directly at janete.cc.barbosa.28@gmail.com</div>';
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+
+    // Prevent XSS by escaping HTML characters
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/\n/g, '<br>');
+    }
+  </script>
+
+</body>
+</html>
